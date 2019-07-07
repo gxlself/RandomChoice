@@ -38,12 +38,12 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "聊天",
+					"name": "123",
 					"pathName": "pages/money/money",
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "活动",
 					"pathName": "pages/interface/article/index",
 					"query": ""

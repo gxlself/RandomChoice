@@ -21,7 +21,7 @@
         "pagePath": "pages/index/index",
         "iconPath": "image/copy.png",
         "selectedIconPath": "image/copy_c.png",
-        "text": "记账"
+        "text": "选择"
       },
       {
         "pagePath": "pages/account/account",
