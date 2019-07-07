@@ -1,0 +1,11 @@
+<view class="page" style="padding-top:{{NAV_HEIGHT}};">
+  <view class="gxl_indexNav" style='height: {{NAV_HEIGHT}};padding-top: {{BAR_HEIGHT}};'>
+    <view class="gxl_navNear">
+      <span bindtap="goSetting" class="ui-icon icon-setting" style="font-size: 22px;"></span>
+    </view>
+    <view class="gxl_navTitle">
+      我的
+    </view>
+    <view class="gxl_navNear"></view>
+  </view>
+</view>

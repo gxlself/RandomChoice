@@ -1,0 +1,35 @@
+{
+  "cloud": true,
+  "pages": [
+    "pages/index/index",
+    "pages/money/money",
+    "pages/account/account",
+    "pages/setting/setting"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ccc",
+    "navigationBarTitleText": "记一笔",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#9D9D9D",
+    "selectedColor": "#272727",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "image/copy.png",
+        "selectedIconPath": "image/copy_c.png",
+        "text": "记账"
+      },
+      {
+        "pagePath": "pages/account/account",
+        "iconPath": "image/mine.png",
+        "selectedIconPath": "image/mine_c.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,3 @@
+<view class='test'>
+  <canvas canvas-id='canvas' style='border:1px solid #ddd;margin: 0 auto;display:block;'></canvas>
+</view>

@@ -1,0 +1,10 @@
+<view class="page">
+  <view class='gxl-header' style='padding: {{STATUS_BAR_HEIGHT}}px;height:{{DEFAULT_HEADER_HEIGHT}}px;'>
+    <text>1</text>
+    <text>2</text>
+    <text>3</text>
+  </view>
+
+  <!-- <button open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo" wx:if="{{!isLogin}}">授权登录</button>
+  <button open-type='share' wx:if="{{isLogin}}"></button> -->
+</view>
