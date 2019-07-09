@@ -1,11 +1,70 @@
 .page{
   box-sizing: border-box;
   height: 100%;
-  background: #f6f6f6;
+  background: #ffffff;
 }
 .gxl-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   box-sizing: content-box;
+  border-bottom: 1rpx #ece8e8 solid;
+  background: #ffffff;
+  z-index: 99;
+}
+.header-icon{
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+  padding: 0 25rpx;
+}
+.header-share{
+  background: url('https://gxlself.com/images/add.png') center no-repeat;
+  background-size: 50rpx 50rpx;
+}
+
+.gxl-body{
+  box-sizing: border-box;
+  background: url('https://gxlself.com/images/line.png') center 0% repeat-y;
+  background-size: 700rpx 60rpx;
+  padding: 0 0 0 30rpx;
+}
+.gxl-blank{
+  width: 100%;
+}
+.choice-item{
+  width: 100%;
+  min-width: 100%;
+  position: relative;
+  height: 60rpx;
+  line-height: 70rpx;
+  padding-right: 9em;
+  display: -webkit-box;
+  color: #2a2a2a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.show-choice{
+  position: absolute;
+  top: 0;
+  right: 30rpx;
+  color: #3385ff;
+}
+.choice-delete{
+  min-width: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e63333;
+}
+.choice-delete image{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
 }

@@ -19,8 +19,8 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "image/copy.png",
-        "selectedIconPath": "image/copy_c.png",
+        "iconPath": "image/edit-a.png",
+        "selectedIconPath": "image/edit-b.png",
         "text": "选择"
       },
       {

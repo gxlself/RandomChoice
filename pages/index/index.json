@@ -1,3 +1,6 @@
 {
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "swiper-out": "../../components/swiper-out/swiper-out"
+  }
 }

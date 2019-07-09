@@ -1,8 +1,10 @@
-const gxl = require('../../utils/util.js')
+const gxl = require('../../utils/util.js');
+const app = getApp();
 Page({
   data: {
     DEFAULT_HEADER_HEIGHT: wx.DEFAULT_HEADER_HEIGHT,
-    STATUS_BAR_HEIGHT: wx.STATUS_BAR_HEIGHT
+    STATUS_BAR_HEIGHT: wx.STATUS_BAR_HEIGHT,
+    BODY_HEIGHT: wx.WIN_HEIGHT - wx.STATUS_BAR_HEIGHT - wx.DEFAULT_HEADER_HEIGHT
   },
   onShareAppMessage: function (e) {
     
@@ -14,7 +16,7 @@ Page({
     })
   },
   onLoad: function () {
-    console.log(gxl.addition(0.01, 0.02, 0.5, 6, 10))
+    console.log(app.globalData)
   },
   onShow: function(){
     let that = this;
@@ -27,5 +29,6 @@ Page({
     }, err => {
       that.setData({isLogin: false})
     })
-  }
+  },
+  
 })

@@ -1,0 +1,3 @@
+<view class="gxl-swiper {{choiceMove}}" bindtouchstart="swiperTouchStart" bindtouchmove="swiperTouchMove" bindtouchend="swiperTouchEnd">
+  <slot></slot>
+</view>

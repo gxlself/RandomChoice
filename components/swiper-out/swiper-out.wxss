@@ -1,0 +1,8 @@
+.gxl-swiper{
+  display: flex;
+  flex-wrap: nowrap;
+  transition: all .6s ease-in-out 0s;
+}
+.gxl-swiper-move{
+	transform: translateX(-200rpx)
+}

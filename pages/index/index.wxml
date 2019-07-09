@@ -1,10 +1,33 @@
 <view class="page">
-  <view class='gxl-header' style='padding: {{STATUS_BAR_HEIGHT}}px;height:{{DEFAULT_HEADER_HEIGHT}}px;'>
-    <text>1</text>
-    <text>2</text>
-    <text>3</text>
+  <view class='gxl-header' style='padding-top: {{STATUS_BAR_HEIGHT}}px;height:{{DEFAULT_HEADER_HEIGHT}}px;'>
+    <text class="header-icon header-share"></text>
+    <text class="header-title">盲选</text>
+    <text class="header-icon"></text>
   </view>
-
+  <view class="gxl-blank" style="height: {{DEFAULT_HEADER_HEIGHT + STATUS_BAR_HEIGHT}}px"></view>
+  <view class="gxl-body" style="min-height: {{BODY_HEIGHT}}px">
+    <swiper-out>
+      <view class="choice-item">
+        1. 你好啊你好啊你好
+        <text class="show-choice">Choose For Me</text>
+      </view>
+      <view class="choice-delete">
+        <image src="../../image/del-a.png" mode="widthFix"></image>
+      </view>
+    </swiper-out>
+    <swiper-out>
+      <view class="choice-item">
+        1. 你好啊你好啊你好
+        <text class="show-choice">Choose For Me</text>
+      </view>
+    </swiper-out>
+    <swiper-out>
+      <view class="choice-item">
+        1. 你好啊你好啊你好
+        <text class="show-choice">Choose For Me</text>
+      </view>
+    </swiper-out>
+  </view>
   <!-- <button open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo" wx:if="{{!isLogin}}">授权登录</button>
   <button open-type='share' wx:if="{{isLogin}}"></button> -->
 </view>
