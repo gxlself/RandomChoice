@@ -199,34 +199,6 @@ function getStorage(key, callback, fail){
     }
   })
 }
-// 计算
-function addition(a, b){
-  if(arguments.length == 2){
-    return Number((a + b).toFixed(2))
-  }else{
-    return Array.from(arguments).reduce((prev, next)=>{
-      return Number((prev + next).toFixed(2))
-    }, 0)
-  }
-}
-function minus(a, b) {
-  if (arguments.length == 2) {
-    return Number((a - b).toFixed(2))
-  } else {
-    return Array.from(arguments).reduce((prev, next) => {
-      return Number((prev - next).toFixed(2))
-    }, 0)
-  }
-}
-function multiply(a, b) {// 默认最多小数点后两位 * 整数 
-  if (arguments.length == 2) {
-    return Number((a * b).toFixed(2))
-  } else {
-    return Array.from(arguments).reduce((prev, next) => {
-      return Number((prev * next).toFixed(2))
-    }, 0)
-  }
-}
 function checkLogin(){
   let userId = wx.getStorageSync('userId');
   if (userId == null || userId == undefined || userId == '<Undefined>' || userId == '') {
@@ -252,8 +224,5 @@ module.exports = {
   saveUserInfo: saveUserInfo,
   setStorage: setStorage,
   getStorage: getStorage,
-  addition: addition,
-  minus: minus,
-  multiply: multiply,
   checkLogin: checkLogin
 }

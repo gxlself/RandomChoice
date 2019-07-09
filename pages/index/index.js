@@ -7,7 +7,7 @@ Page({
     BODY_HEIGHT: wx.WIN_HEIGHT - wx.STATUS_BAR_HEIGHT - wx.DEFAULT_HEADER_HEIGHT
   },
   onShareAppMessage: function (e) {
-    
+    console.log(e)
   },
   bindGetUserInfo: function (e) {
     let that = this;
@@ -30,5 +30,15 @@ Page({
       that.setData({isLogin: false})
     })
   },
-  
+  showResult() {
+    console.log('choose for me')
+  },
+  deleteChoice() {
+    console.log('delete')
+  },
+  goAddChoice() {
+    wx.navigateTo({
+      url: '../add-choice/add-choice'
+    })
+  }
 })

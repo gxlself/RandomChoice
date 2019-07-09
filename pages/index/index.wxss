@@ -2,6 +2,8 @@
   box-sizing: border-box;
   height: 100%;
   background: #ffffff;
+  max-width: 100%;
+  overflow: auto;
 }
 .gxl-header{
   position: fixed;
@@ -26,12 +28,13 @@
   background: url('https://gxlself.com/images/add.png') center no-repeat;
   background-size: 50rpx 50rpx;
 }
-
 .gxl-body{
   box-sizing: border-box;
   background: url('https://gxlself.com/images/line.png') center 0% repeat-y;
-  background-size: 700rpx 60rpx;
+  background-size: 700rpx 80rpx;
   padding: 0 0 0 30rpx;
+  max-width: 100%;
+  overflow: hidden;
 }
 .gxl-blank{
   width: 100%;
@@ -40,8 +43,8 @@
   width: 100%;
   min-width: 100%;
   position: relative;
-  height: 60rpx;
-  line-height: 70rpx;
+  height: 80rpx;
+  line-height: 90rpx;
   padding-right: 9em;
   display: -webkit-box;
   color: #2a2a2a;
@@ -56,15 +59,25 @@
   right: 30rpx;
   color: #3385ff;
 }
-.choice-delete{
+.choice-delete, .choice-share{
   min-width: 100rpx;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #e63333;
+  border-radius: 0;
+  border: 0;
 }
-.choice-delete image{
+.choice-delete{
+  background: #f54242;
+}
+.choice-share{
+  background: #20d830;
+}
+.choice-delete image, .choice-share image{
   width: 40rpx;
   height: 40rpx;
-  border-radius: 50%;
+  line-height: 0;
+}
+button::after{
+  border: 0;
 }

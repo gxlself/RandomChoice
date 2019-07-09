@@ -1,6 +1,6 @@
 <view class="page">
   <view class='gxl-header' style='padding-top: {{STATUS_BAR_HEIGHT}}px;height:{{DEFAULT_HEADER_HEIGHT}}px;'>
-    <text class="header-icon header-share"></text>
+    <text class="header-icon header-share" bindtap="goAddChoice"></text>
     <text class="header-title">盲选</text>
     <text class="header-icon"></text>
   </view>
@@ -9,22 +9,37 @@
     <swiper-out>
       <view class="choice-item">
         1. 你好啊你好啊你好
+        <text class="show-choice" bindtap="showResult">Choose For Me</text>
+      </view>
+      <view class="choice-delete" bindtap="deleteChoice">
+        <image src="../../image/del-a.png" mode="widthFix"></image>
+      </view>
+      <button open-type="share" class="choice-share" bindtap="setDisabled">
+        <image src="../../image/share-a.png" mode="widthFix"></image>
+      </button>
+    </swiper-out>
+    <swiper-out>
+      <view class="choice-item">
+        1. 你好啊你好啊你好
         <text class="show-choice">Choose For Me</text>
       </view>
       <view class="choice-delete">
         <image src="../../image/del-a.png" mode="widthFix"></image>
       </view>
-    </swiper-out>
-    <swiper-out>
-      <view class="choice-item">
-        1. 你好啊你好啊你好
-        <text class="show-choice">Choose For Me</text>
+      <view class="choice-share">
+        <image src="../../image/share-a.png" mode="widthFix"></image>
       </view>
     </swiper-out>
     <swiper-out>
       <view class="choice-item">
         1. 你好啊你好啊你好
         <text class="show-choice">Choose For Me</text>
+      </view>
+      <view class="choice-delete">
+        <image src="../../image/del-a.png" mode="widthFix"></image>
+      </view>
+      <view class="choice-share">
+        <image src="../../image/share-a.png" mode="widthFix"></image>
       </view>
     </swiper-out>
   </view>

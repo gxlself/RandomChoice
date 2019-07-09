@@ -1,0 +1,14 @@
+<view class="page">
+  <view class='gxl-header' style='padding-top: {{STATUS_BAR_HEIGHT}}px;height:{{DEFAULT_HEADER_HEIGHT}}px;'>
+    <text class="header-icon header-back" bindtap="back"></text>
+    <input class="header-title" type="text"></input>
+  </view>
+  <view class="gxl-blank" style="height: {{DEFAULT_HEADER_HEIGHT + STATUS_BAR_HEIGHT}}px"></view>
+  <view class="gxl-body" style="min-height: {{BODY_HEIGHT}}px">
+    <view class="choice-item" wx:for="{{editChoice}}">
+      <view class="choice-index">{{index + 1}}.</view>
+      <input type="text" wx:if="{{!item.isConfirm}}" focus="{{!item.isConfirm}}" confirm-type="next" bindconfirm="nextInput"></input>
+      <text wx:if="{{item.isConfirm}}">{{item.content}}</text>
+    </view>
+  </view>
+</view>

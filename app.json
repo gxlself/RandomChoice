@@ -2,15 +2,15 @@
   "cloud": true,
   "pages": [
     "pages/index/index",
-    "pages/money/money",
     "pages/account/account",
-    "pages/setting/setting"
+    "pages/add-choice/add-choice"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ccc",
-    "navigationBarTitleText": "记一笔",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "盲选",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "color": "#9D9D9D",
