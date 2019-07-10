@@ -1,14 +1,16 @@
 <view class="page">
   <view class='gxl-header' style='padding-top: {{STATUS_BAR_HEIGHT}}px;height:{{DEFAULT_HEADER_HEIGHT}}px;'>
     <text class="header-icon header-back" bindtap="back"></text>
-    <input class="header-title" type="text"></input>
+    <input class="header-title" type="text" bindinput="inputTitle" value="{{currentTitle}}"></input>
+    <image class="header-sure" src="../../image/sure-a.png" mode="widthFix" bindtap="saveChoice" wx:if="{{editChoice.length > 1 || (editChoice.length == 1 && editChoice[0].content)}}"></image>
   </view>
   <view class="gxl-blank" style="height: {{DEFAULT_HEADER_HEIGHT + STATUS_BAR_HEIGHT}}px"></view>
   <view class="gxl-body" style="min-height: {{BODY_HEIGHT}}px">
     <view class="choice-item" wx:for="{{editChoice}}">
       <view class="choice-index">{{index + 1}}.</view>
-      <input type="text" wx:if="{{!item.isConfirm}}" focus="{{!item.isConfirm}}" confirm-type="next" bindconfirm="nextInput"></input>
+      <input type="text" wx:if="{{!item.isConfirm}}" data-index="{{index}}" focus="{{!item.isConfirm}}" bindinput="inputPointContent" confirm-type="{{(editChoice.length - 1 == index) ? 'next' : 'done'}}" bindconfirm="nextInput" value="{{item.content}}"></input>
       <text wx:if="{{item.isConfirm}}">{{item.content}}</text>
+      <image wx:if="{{item.isConfirm}}" class="edit-choice" src="../../image/edit-a.png" mode="widthFix" data-index="{{index}}" bindtap="editChoice"></image>
     </view>
   </view>
 </view>
