@@ -20,7 +20,7 @@ Page({
     let index = e.currentTarget.dataset.index
     // 前后去空判定
     if (e.detail.value == '' || e.detail.value == ' ' || e.detail.value.trim() == '' || e.detail.value.trim() == ' ') {
-      wx.showToast({title: '请填写当前选项',icon: 'none',duration: 1500, mask: true})
+      wx.showToast({ title: '请填写当前选项', icon: 'none', duration: 1500, mask: true })
       return
     }
     // 对是否编辑进行判定 index不是最后一条就属于编辑状态
@@ -31,31 +31,31 @@ Page({
       let addIndex = this.data.editChoice.length - 1
       this.data.editChoice[addIndex].content = e.detail.value.trim()
       this.data.editChoice[addIndex].isConfirm = true
-      this.data.editChoice.push({content: '',isConfirm: false})
+      this.data.editChoice.push({ content: '', isConfirm: false })
     }
-    this.setData({editChoice: this.data.editChoice})
+    this.setData({ editChoice: this.data.editChoice })
   },
   // 编辑已经确认的
   editChoice(e) {
     let index = e.currentTarget.dataset.index
     this.data.editChoice[index].isConfirm = false
-    this.setData({editChoice: this.data.editChoice})
+    this.setData({ editChoice: this.data.editChoice })
   },
   // 标题输入绑定
   inputTitle(e) {
     this.data.currentTitle = e.detail.value
-    this.setData({currentTitle: this.data.currentTitle})
+    this.setData({ currentTitle: this.data.currentTitle })
   },
   // 对应输入绑定
   inputPointContent(e) {
     let index = e.currentTarget.dataset.index
     this.data.editChoice[index].content = e.detail.value.trim()
-    this.setData({editChoice: this.data.editChoice})
+    this.setData({ editChoice: this.data.editChoice })
   },
   // 开始保存当前疑难
   saveChoice() {
     if (this.data.currentTitle == '' || this.data.currentTitle == ' ' || this.data.currentTitle.trim() == '' || this.data.currentTitle.trim() == ' ') {
-      wx.showToast({title: '请填写犹豫的主题',icon: 'none',duration: 1500, mask: true})
+      wx.showToast({ title: '请填写犹豫的主题', icon: 'none', duration: 1500, mask: true })
       return
     }
     let length = this.data.editChoice.length
@@ -63,7 +63,7 @@ Page({
       if (this.checkContent(this.data.editChoice[0].content)) {
         this.formChoice(true)
       } else {
-        wx.showToast({title: '没有犹豫的事项',icon: 'none',duration: 1500, mask: true})
+        wx.showToast({ title: '没有犹豫的事项', icon: 'none', duration: 1500, mask: true })
       }
     } else if (length > 1) {
       if (this.checkContent(this.data.editChoice[length - 1].content)) {
@@ -85,7 +85,7 @@ Page({
       }
       this.formChoice(false)
     } else {
-      wx.showToast({title: '请添加犹豫的事项', icon: 'none', duration: 1500, mask: true})
+      wx.showToast({ title: '请添加犹豫的事项', icon: 'none', duration: 1500, mask: true })
       return
     }
   },
@@ -112,21 +112,21 @@ Page({
       if (pageNum > 1) {
         this.back()
       } else {
-        wx.reLaunch({url: '../index/index'})
+        wx.reLaunch({ url: '../index/index' })
       }
     }, err => {
-      wx.showToast({title: '添加失败',icon: 'none',duration: 1500, mask: true})
+      wx.showToast({ title: '添加失败', icon: 'none', duration: 1500, mask: true })
     })
   },
   onLoad: function (options) {
     gxl.getStorage('openid', res => {
-      if (res){
-        this.setData({ isLogin: true, openId: res})
-      }else{
+      if (res) {
+        this.setData({ isLogin: true, openId: res })
+      } else {
         this.setData({ isLogin: false })
       }
     }, err => {
-      this.setData({isLogin: false})
+      this.setData({ isLogin: false })
     })
   },
   onReady: function () {

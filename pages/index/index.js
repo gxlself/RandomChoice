@@ -13,9 +13,11 @@ Page({
     console.log(e)
   },
   bindGetUserInfo: function (e) {
-    gxl.saveUserInfo(e.detail, res => {
-      this.setData({ isLogin: true })
-      this.onShow()
+    gxl.saveUserInfo(e.detail, (openId) => {
+      console.log(openId)
+      app.globalData.openId = openId
+      this.setData({ isLogin: true, openId: openId })
+      this.onLoad()
     })
   },
   onLoad: function () {
@@ -30,9 +32,11 @@ Page({
     }, err => {
       this.setData({isLogin: false})
     })
+    gxl.cloudReq('add', res => {
+      console.log(res)
+    })
   },
   onShow: function(){
-    console.log(this.data.openId, app.globalData.openId)
     if ((this.data.openId || app.globalData.openId) && this.data.choiceList.length < 1) {
       this.setData({ isLogin: true })
       this.getChoiceList(this.data.openId || app.globalData.openId)

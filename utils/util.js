@@ -153,13 +153,12 @@ function getCloudUrl(fileList, callback, fail){
   })
 }
 function saveUserInfo(user, callback){
-  cloudReq('login', res => {
-    let { appid, event, openid, unionid } = res.result;
+  cloudReq('login', loginData => {
+    let { appid, event, openid, unionid } = loginData.result;
     setStorage('openid', openid)
     setStorage('avatarUrl', user.userInfo.avatarUrl)
     setStorage('nickName', user.userInfo.nickName)
     let data = {
-      openid: openid,
       unionid: unionid,
       avatarUrl: user.userInfo.avatarUrl,
       city: user.userInfo.city,
@@ -171,16 +170,32 @@ function saveUserInfo(user, callback){
       encryptedData: user.encryptedData,
       iv: user.iv,
       signature: user.signature,
-      timestamp: new Date().getTime()
+      timestamp: new Date().getTime(),
+      _openid: 'oPQ1o5GRkC5KDs2y9rBysQ_bwS8c',
+      openId: openid
     }
-    getMoreData('user', {openid: openid},
-      res => {
-        let _id = res.data[0]._id;
-        setStorage('userId', _id)
-        if (res.data.length == 0){
-          addData('user', data, callback)
+    getMoreData('user', {_openid: openid},
+      userData => {
+        if (userData.data.length == 0) {
+          console.log(1)
+          callback(openid)
+        } else {
+          console.log(2)
+          let _id = userData.data[0]._id;
+          setStorage('userId', _id)
+          addData('user', data, addResponse => {
+            console.log(3)
+            setStorage('userId', addResponse._id)
+            callback(openid)
+          })
         }
-        callback(res)
+      }, err => {
+        console.log('saveUserInfo --- err', err)
+        addData('user', data, addResponse => {
+          console.log('saveUserInfo --- addData --------  addResponse ', addResponse)
+          setStorage('userId', addResponse._id)
+          callback(openid)
+        })
       }
     )
   })
