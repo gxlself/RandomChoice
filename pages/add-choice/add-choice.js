@@ -66,7 +66,6 @@ Page({
         wx.showToast({title: '没有犹豫的事项',icon: 'none',duration: 1500, mask: true})
       }
     } else if (length > 1) {
-      let isSaveLast = false
       if (this.checkContent(this.data.editChoice[length - 1].content)) {
         // 对话框判定是否保存最后一条
         wx.showModal({
@@ -84,6 +83,7 @@ Page({
         })
         return
       }
+      this.formChoice(false)
     } else {
       wx.showToast({title: '请添加犹豫的事项', icon: 'none', duration: 1500, mask: true})
       return
@@ -108,7 +108,12 @@ Page({
       title: this.data.currentTitle,
       choice: choice
     }, res => {
-      this.back()
+      let pageNum = getCurrentPages().length
+      if (pageNum > 1) {
+        this.back()
+      } else {
+        wx.reLaunch({url: '../index/index'})
+      }
     }, err => {
       wx.showToast({title: '添加失败',icon: 'none',duration: 1500, mask: true})
     })
@@ -116,7 +121,6 @@ Page({
   onLoad: function (options) {
     gxl.getStorage('openid', res => {
       if (res){
-        console.log(res)
         this.setData({ isLogin: true, openId: res})
       }else{
         this.setData({ isLogin: false })

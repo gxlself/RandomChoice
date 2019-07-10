@@ -5,38 +5,40 @@ Page({
     DEFAULT_HEADER_HEIGHT: wx.DEFAULT_HEADER_HEIGHT,
     STATUS_BAR_HEIGHT: wx.STATUS_BAR_HEIGHT,
     BODY_HEIGHT: wx.WIN_HEIGHT - wx.STATUS_BAR_HEIGHT - wx.DEFAULT_HEADER_HEIGHT,
-    openId: '',
-    choiceList: []
+    openId: '',                                         // 用户openId
+    choiceList: [],                                     // 由于list
+    isLogin: false                                      // 是否登录
   },
   onShareAppMessage: function (e) {
     console.log(e)
   },
   bindGetUserInfo: function (e) {
-    let that = this;
     gxl.saveUserInfo(e.detail, res => {
-      that.setData({ isLogin: true })
+      this.setData({ isLogin: true })
+      this.onShow()
     })
   },
   onLoad: function () {
-    console.log(app.globalData)
-    
-  },
-  onShow: function(){
-    let that = this;
     gxl.getStorage('openid', res => {
-      if (res){
-        that.setData({ isLogin: true, openId: res })
-        gxl.getMoreData('choice', {_openid: res}, res =>{
-          if (res.errMsg.indexOf('get:ok') > -1) {
-            that.setData({choiceList: res.data})
-          }
-        })
+      if (res != '' || res != null || res != undefined || res != '<Undefined>') {
+        app.globalData.openId = res
+        this.setData({ isLogin: true, openId: res })
+        this.getChoiceList(res)
       }else{
-        that.setData({ isLogin: false })
+        this.setData({ isLogin: false })
       }
     }, err => {
-      that.setData({isLogin: false})
+      this.setData({isLogin: false})
     })
+  },
+  onShow: function(){
+    console.log(this.data.openId, app.globalData.openId)
+    if ((this.data.openId || app.globalData.openId) && this.data.choiceList.length < 1) {
+      this.setData({ isLogin: true })
+      this.getChoiceList(this.data.openId || app.globalData.openId)
+    } else {
+      this.setData({ isLogin: false })
+    }
   },
   showResult() {
     console.log('choose for me')
@@ -45,8 +47,19 @@ Page({
     console.log('delete')
   },
   goAddChoice() {
+    if (!this.data.openId && !app.globalData.openId) {
+      this.setData({ isLogin: false })
+      return 
+    }
     wx.navigateTo({
       url: '../add-choice/add-choice'
+    })
+  },
+  getChoiceList(openId) {
+    gxl.getMoreData('choice', {_openid: openId}, res =>{
+      if (res.errMsg.indexOf('get:ok') > -1) {
+        this.setData({choiceList: res.data})
+      }
     })
   }
 })

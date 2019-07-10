@@ -19,6 +19,22 @@
       </button>
     </swiper-out>
   </view>
+  <view class="gxl-modal" wx:if="{{!isLogin}}">
+    <view class="gxl-modal-box" wx:if="{{!isLogin}}">
+      <view class="gxl-modal-ava">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="gxl-modal-hint">请先微信登录~</view>
+      <view class="gxl-modal-login">
+        <button class="gxl-modal-weixin" open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo">
+          <image src="../../image/weixin-b.png" mode="widthFix"></image>
+        </button>
+        <view class="gxl-modal-weixin">
+          <image src="../../image/advance.png" mode="widthFix"></image>
+        </view>
+      </view>
+    </view>
+  </view>
   <!-- <button open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo" wx:if="{{!isLogin}}">授权登录</button>
   <button open-type='share' wx:if="{{isLogin}}">授权登录</button> -->
 </view>

@@ -4,6 +4,6 @@ App({
     system.attachInfo();
   },
   globalData: {
-    test: 123
+    openId: ''
   }
 })
