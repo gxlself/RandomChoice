@@ -1,2 +1,54 @@
-<!--pages/help/help.wxml-->
-<text>pages/help/help.wxml</text>
+<view class="page">
+  <view class='gxl-header' style='padding-top: {{STATUS_BAR_HEIGHT}}px;height:{{DEFAULT_HEADER_HEIGHT}}px;'>
+    <text class="header-icon header-back" bindtap="back"></text>
+    <text class="header-title">随心所选-帮你选</text>
+    <text class="header-icon"></text>
+  </view>
+  <view class="gxl-blank" style="height: {{DEFAULT_HEADER_HEIGHT + STATUS_BAR_HEIGHT}}px"></view>
+  <view class="share-people" style="min-height: {{BODY_HEIGHT}}px">
+    <view class="share-avator">
+      <image mode="widthFix" src="{{fromPerson.avatarUrl}}"></image>
+    </view>
+    <view class="share-nicename">{{fromPerson.nickName}}</view>
+    <view class="share-choice">
+      <view class="choice-title">{{fromPersonChoice.title}}</view>
+      <view class="choice-content">
+        <view class="choice-item" wx:for="{{fromPersonChoice.choice}}" data-index="{{index}}" bind:tap="helpChooseItem">
+          {{index + 1}}、{{item.content}}
+          <image src="../../image/sure-a.png" mode="widthFix" wx:if="{{(item.choose && !isOwner && !ishelpChoose) || (isOwner && item.owner) || (ishelpChoose && item.choose && !isOwner)}}"></image>
+        </view>
+        <button class="choice-help-sure" wx:if="{{!isOwner && !ishelpChoose}}" bindtap="helpChoose">帮他做这个决定！！！</button>
+      </view>
+    </view>
+    <view class="choice-split">
+      其他朋友帮选结果
+    </view>
+    <view class="help-choice" wx:if="{{moreHelpChoose.length > 0}}">
+      <view class="help-choice-item" wx:for="{{moreHelpChoose}}">
+        <view class="help-choice-user">
+          <image mode="widthFix" src="{{item.avatarUrl}}"></image>
+          <view class="choice-user-info">
+            <view>{{item.nickName}}</view>
+            <view>{{item.date}}</view>
+          </view>
+        </view>
+        <view class="help-choice-result">
+          {{item.chooseChoice}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="gxl-modal" wx:if="{{!isLogin}}">
+    <view class="gxl-modal-box" wx:if="{{!isLogin}}">
+      <view class="gxl-modal-ava">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="gxl-modal-hint">请先微信登录~</view>
+      <view class="gxl-modal-login">
+        <button class="gxl-modal-weixin" open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo">
+          <image src="../../image/weixin-b.png" mode="widthFix"></image>
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,6 +1,6 @@
 function attachInfo() {
   var res = wx.getSystemInfoSync();
-  console.log(res)
+  // console.log(res)
   wx.SCREEN_WIDTH = res.screenWidth;
   wx.SCREEN_HEIGHT = res.screenHeight;
   wx.WIN_WIDTH = res.windowWidth;

@@ -14,8 +14,6 @@ Page({
   onShow(){
   },
   goSetting(){
-    wx.navigateTo({
-      url: '../setting/setting',
-    })
+    
   }
 })

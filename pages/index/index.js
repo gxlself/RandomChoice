@@ -1,7 +1,7 @@
 const gxl = require('../../utils/util.js');
 const app = getApp();
-const CARD_MUSIC = 'https://gxlself.com/images/card.wav'
-let backgroundAudioManager = null
+// const CARD_MUSIC = 'https://gxlself.com/images/card.wav'
+// let backgroundAudioManager = null
 Page({
   data: {
     DEFAULT_HEADER_HEIGHT: wx.DEFAULT_HEADER_HEIGHT,
@@ -15,23 +15,24 @@ Page({
     tapType: 1,                                         // 点击按钮类型
   },
   onShareAppMessage: function (e) {
-    // 1.0.0版本暂时不加分享朋友帮选功能  后续研究
-    // if (e.from == 'button') {
-    //   let openId = e.target.dataset.openId
-    //   let id = e.target.dataset.id
-    //   this.setData({tapType: 2})
-    //   return {
-    //     title: '快来帮我看看这件事情我该怎么决定？',
-    //     path: '/pages/help/help?from=' + openId + '&id=' + id,
-    //     imageUrl: 'https://gxlself.com/images/help-choose.png'
-    //   }
-    // } else {
-      return {
-        title: '随心所选-帮你选一个你犹豫的事情',
-        path: '/pages/index/index',
-        imageUrl: 'https://gxlself.com/images/help-choose.png'
-      }
-    // }
+    switch(e.from) {
+      case 'button':
+        let openId = e.target.dataset.openid
+        let id = e.target.dataset.id
+        console.log(openId, id)
+        this.setData({tapType: 2})
+        return {
+          title: '快来帮我看看这件事情我该怎么决定？',
+          path: '/pages/help/help?from=' + openId + '&id=' + id,
+          imageUrl: 'https://gxlself.com/images/help-choose.png'
+        }
+      default:
+        return {
+          title: '随心所选-帮你选一个你犹豫的事情',
+          path: '/pages/index/index',
+          imageUrl: 'https://gxlself.com/images/help-choose.png'
+        }
+    }
   },
   bindGetUserInfo: function (e) {
     gxl.saveUserInfo(e.detail, (openId) => {

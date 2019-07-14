@@ -112,7 +112,8 @@ Page({
     gxl.addData('choice', {
       title: this.data.currentTitle,
       choice: choice,
-      choose: choice[Math.floor(Math.random() * choice.length)]
+      choose: choice[Math.floor(Math.random() * choice.length)],
+      timestamp: new Date().getTime()
     }, res => {
       let pageNum = getCurrentPages().length
       app.globalData.choiceCount ++
