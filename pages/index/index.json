@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "swiper-out": "../../components/swiper-out/swiper-out"
+    "swiper-out": "../../components/swiper-out/swiper-out",
+    "user-toast": "../../components/user-toast/user-toast"
   }
 }

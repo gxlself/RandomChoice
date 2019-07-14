@@ -8,7 +8,7 @@
   <view class="gxl-body" style="min-height: {{BODY_HEIGHT}}px">
     <view class="choice-item" wx:for="{{editChoice}}">
       <view class="choice-index">{{index + 1}}.</view>
-      <input type="text" wx:if="{{!item.isConfirm}}" data-index="{{index}}" focus="{{!item.isConfirm}}" bindinput="inputPointContent" confirm-type="{{(editChoice.length - 1 == index) ? 'next' : 'done'}}" bindconfirm="nextInput" value="{{item.content}}"></input>
+      <input type="text" wx:if="{{!item.isConfirm}}" data-index="{{index}}" focus="{{!item.isConfirm && alters.length == 0}}" bindinput="inputPointContent" confirm-type="{{(editChoice.length - 1 == index) ? 'next' : 'done'}}" bindconfirm="nextInput" value="{{item.content}}"></input>
       <text wx:if="{{item.isConfirm}}">{{item.content}}</text>
       <image wx:if="{{item.isConfirm}}" class="edit-choice" src="../../image/edit-a.png" mode="widthFix" data-index="{{index}}" bindtap="editChoice"></image>
     </view>

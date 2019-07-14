@@ -7,10 +7,10 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"coverView": true,
-		"autoAudits": false,
+		"autoAudits": true,
 		"uglifyFileName": true,
 		"checkInvalidKey": true,
+		"coverView": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
 		"babelSetting": {
@@ -25,6 +25,11 @@
 	"projectname": "%E5%B0%8F%E5%B0%8F%E6%B5%B7%E6%8A%A5",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"scripts": {
+		"beforeCompile": "",
+		"beforePreview": "",
+		"beforeUpload": ""
+	},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -43,13 +48,14 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
-					"name": "123",
-					"pathName": "pages/money/money",
-					"query": ""
+					"name": "添加",
+					"pathName": "pages/add-choice/add-choice",
+					"query": "",
+					"scene": null
 				},
 				{
 					"id": 1,

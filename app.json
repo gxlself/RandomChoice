@@ -3,12 +3,13 @@
   "pages": [
     "pages/index/index",
     "pages/account/account",
-    "pages/add-choice/add-choice"
+    "pages/add-choice/add-choice",
+    "pages/help/help"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ccc",
-    "navigationBarTitleText": "盲选",
+    "navigationBarTitleText": "随心所选-帮你选",
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"
   },

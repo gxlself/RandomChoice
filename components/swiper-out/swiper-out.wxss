@@ -3,6 +3,20 @@
   flex-wrap: nowrap;
   transition: all .6s ease-in-out 0s;
 }
+.gxl-swiper-del{
+  animation: del 0.2s ease forwards;
+  overflow: hidden;
+}
 .gxl-swiper-move{
 	transform: translateX(-200rpx)
+}
+@keyframes del{
+  from {
+    transform: translateX(-200rpx);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-950rpx);
+    opacity: 0;
+  }
 }

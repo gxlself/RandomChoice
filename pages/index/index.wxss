@@ -22,11 +22,14 @@
   display: block;
   width: 50rpx;
   height: 50rpx;
-  padding: 0 25rpx;
+  padding:20rpx 25rpx;
 }
 .header-share{
   background: url('https://gxlself.com/images/add.png') center no-repeat;
   background-size: 50rpx 50rpx;
+}
+.header-title{
+  color: #3385ff;
 }
 .gxl-body{
   box-sizing: border-box;
@@ -46,8 +49,8 @@
   height: 80rpx;
   line-height: 90rpx;
   padding-right: 9em;
-  display: -webkit-box;
   color: #2a2a2a;
+  display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 1;
@@ -134,3 +137,87 @@ button::after{
   width: 100%;
   max-width: 100%;
 }
+
+.user-result{
+  position: relative;
+  width: 463.5rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  /* animation: toast 0.15s ease forwards; */
+  animation: card .5s ease forwards;
+  /* backface-visibility:hidden;
+  -webkit-backface-visibility:hidden; */
+  /* z-index: 2; */
+}
+/* .user-result::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #dddddd;
+  border-radius: 16rpx;
+  transform: rotateY(180deg) translateZ(40rpx);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  animation: card-back .5s ease forwards;
+} */
+.result-title{
+  color: #3385ff;
+  text-align: center;
+  font-size: 30rpx;
+  padding: 15rpx 30rpx;
+  border-bottom: 1rpx #3385ff solid;
+}
+.result-choice{
+  color: #444547;
+  text-align: center;
+  font-size: 50rpx;
+  word-break: break-all;
+  padding: 30rpx 30rpx 10rpx;
+}
+.result-choice::after{
+  display: block;
+  position: relative;
+  content: '已经为您选择了';
+  color: #3385ff;
+  font-size: 24rpx;
+  text-align: center;
+  padding-bottom: 20rpx;
+}
+.result-sure{
+  background: #3385ff;
+  text-align: center;
+  font-size: 30rpx;
+  padding: 15rpx 0;
+  color: #ffffff;
+}
+@keyframes card{
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(720deg);
+  }
+}
+@keyframes card-back{
+  from {
+    transform: rotateY(180deg);
+  }
+  to {
+    transform: rotateY(900deg);
+  }
+}
+/* @keyframes toast{
+  from {
+    opacity: 0.5;
+    transform: scale3d(.3, .3, .3);
+  }
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+} */

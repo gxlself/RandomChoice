@@ -1,5 +1,7 @@
 const gxl = require('../../utils/util.js');
 const app = getApp();
+const CARD_MUSIC = 'https://gxlself.com/images/card.wav'
+let backgroundAudioManager = null
 Page({
   data: {
     DEFAULT_HEADER_HEIGHT: wx.DEFAULT_HEADER_HEIGHT,
@@ -7,20 +9,45 @@ Page({
     BODY_HEIGHT: wx.WIN_HEIGHT - wx.STATUS_BAR_HEIGHT - wx.DEFAULT_HEADER_HEIGHT,
     openId: '',                                         // 用户openId
     choiceList: [],                                     // 由于list
-    isLogin: false                                      // 是否登录
+    isLogin: false,                                     // 是否登录
+    showResult: false,                                  // 展示结果显隐
+    choiceObject: {},                                   // 展示结果
+    tapType: 1,                                         // 点击按钮类型
   },
   onShareAppMessage: function (e) {
-    console.log(e)
+    // 1.0.0版本暂时不加分享朋友帮选功能  后续研究
+    // if (e.from == 'button') {
+    //   let openId = e.target.dataset.openId
+    //   let id = e.target.dataset.id
+    //   this.setData({tapType: 2})
+    //   return {
+    //     title: '快来帮我看看这件事情我该怎么决定？',
+    //     path: '/pages/help/help?from=' + openId + '&id=' + id,
+    //     imageUrl: 'https://gxlself.com/images/help-choose.png'
+    //   }
+    // } else {
+      return {
+        title: '随心所选-帮你选一个你犹豫的事情',
+        path: '/pages/index/index',
+        imageUrl: 'https://gxlself.com/images/help-choose.png'
+      }
+    // }
   },
   bindGetUserInfo: function (e) {
     gxl.saveUserInfo(e.detail, (openId) => {
-      console.log(openId)
       app.globalData.openId = openId
-      this.setData({ isLogin: true, openId: openId })
-      this.onLoad()
+      this.setData({ isLogin: true, openId: openId }, () => {
+        this.onLoad()
+      })
     })
   },
   onLoad: function () {
+    if (app.globalData.openId) {
+      this.setData({ isLogin: true, openId: app.globalData.openId }, () => {
+        this.getChoiceList(app.globalData.openId)
+      })
+      return
+    }
     gxl.getStorage('openid', res => {
       if (res != '' || res != null || res != undefined || res != '<Undefined>') {
         app.globalData.openId = res
@@ -32,23 +59,41 @@ Page({
     }, err => {
       this.setData({isLogin: false})
     })
-    gxl.cloudReq('add', res => {
-      console.log(res)
-    })
   },
   onShow: function(){
-    if ((this.data.openId || app.globalData.openId) && this.data.choiceList.length < 1) {
-      this.setData({ isLogin: true })
-      this.getChoiceList(this.data.openId || app.globalData.openId)
-    } else {
-      this.setData({ isLogin: false })
+    if ((app.globalData.choiceCount != this.data.choiceList.length) && app.globalData.openId) {
+      this.getChoiceList(app.globalData.openId)
     }
   },
-  showResult() {
-    console.log('choose for me')
+  showResult(e) {
+    this.setData({tapType: 1})
+    let choiceIndex = e.currentTarget.dataset.index
+    this.data.choiceObject = this.data.choiceList[choiceIndex]
+    this.data.showResult = true
+    this.setData({choiceList: this.data.choiceList, showResult: this.data.showResult, choiceObject: this.data.choiceObject}, () => {
+      // backgroundAudioManager = wx.getBackgroundAudioManager()
+      // backgroundAudioManager.title = '随心所选'
+      // backgroundAudioManager.singer = '随心所选'
+      // backgroundAudioManager.coverImgUrl = 'https://gxlself.com/images/random.png'
+      // backgroundAudioManager.src = CARD_MUSIC
+      wx.vibrateShort()
+    })
   },
-  deleteChoice() {
-    console.log('delete')
+  tapToast() {
+    this.data.showResult =! this.data.showResult
+    this.setData({showResult: this.data.showResult})
+  },
+  deleteChoice(e) {
+    this.setData({tapType: 2})
+    let choiceId = e.currentTarget.dataset.id
+    let choiceIndex = e.currentTarget.dataset.index
+    let choiceList = this.data.choiceList
+    choiceList[choiceIndex].show = false
+    gxl.deleteOneData('choice', choiceId, success => {
+      this.setData({choiceList: choiceList, tapType: 1})
+    }, fail => {
+      wx.showToast({ title: '删除失败', icon: 'none', duration: 1500, mask: true })
+    })
   },
   goAddChoice() {
     if (!this.data.openId && !app.globalData.openId) {
@@ -62,8 +107,27 @@ Page({
   getChoiceList(openId) {
     gxl.getMoreData('choice', {_openid: openId}, res =>{
       if (res.errMsg.indexOf('get:ok') > -1) {
+        app.globalData.choiceCount = res.data.length
+        res.data = res.data.map(item => {
+          item.show = true
+          return item
+        })
         this.setData({choiceList: res.data})
       }
     })
+  },
+  animationEnd() {
+    // backgroundAudioManager.stop()
+    // backgroundAudioManager.seek(0)
+  },
+  swiperHide(e) {
+    let choiceIndex = e.currentTarget.dataset.index
+    this.data.choiceList.splice(choiceIndex, 1)
+    this.setData({choiceList: this.data.choiceList})
+    if (app.globalData.choiceCount > 0) {
+      app.globalData.choiceCount--
+    } else {
+      app.globalData.choiceCount = 0 
+    }
   }
 })

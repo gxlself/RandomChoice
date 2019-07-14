@@ -1,4 +1,5 @@
 const gxl = require('../../utils/util.js');
+const sha1 = require('../../utils/sha1.js');
 const app = getApp();
 Page({
   data: {
@@ -10,7 +11,8 @@ Page({
       isConfirm: false
     }],
     currentTitle: '',
-    openId: ''
+    openId: '',
+    alters: []
   },
   back() {
     wx.navigateBack()
@@ -27,6 +29,8 @@ Page({
     if (index != this.data.editChoice.length - 1) {
       this.data.editChoice[index].content = e.detail.value.trim()
       this.data.editChoice[index].isConfirm = true
+      this.data.alters.pop()
+      this.setData({alters: this.data.alters})
     } else {
       let addIndex = this.data.editChoice.length - 1
       this.data.editChoice[addIndex].content = e.detail.value.trim()
@@ -38,8 +42,9 @@ Page({
   // 编辑已经确认的
   editChoice(e) {
     let index = e.currentTarget.dataset.index
+    this.data.alters.push(index)
     this.data.editChoice[index].isConfirm = false
-    this.setData({ editChoice: this.data.editChoice })
+    this.setData({editChoice: this.data.editChoice, alters: this.data.alters})
   },
   // 标题输入绑定
   inputTitle(e) {
@@ -106,9 +111,11 @@ Page({
     }
     gxl.addData('choice', {
       title: this.data.currentTitle,
-      choice: choice
+      choice: choice,
+      choose: choice[Math.floor(Math.random() * choice.length)]
     }, res => {
       let pageNum = getCurrentPages().length
+      app.globalData.choiceCount ++
       if (pageNum > 1) {
         this.back()
       } else {
@@ -129,25 +136,11 @@ Page({
       this.setData({ isLogin: false })
     })
   },
-  onReady: function () {
-
-  },
-  onShow: function () {
-
-  },
-  onHide: function () {
-
-  },
-  onUnload: function () {
-
-  },
-  onPullDownRefresh: function () {
-
-  },
-  onReachBottom: function () {
-
-  },
   onShareAppMessage: function () {
-
+    return {
+      title: '随心所选-帮你选一个你犹豫的事情',
+      path: '/pages/index/index',
+      imageUrl: 'https://gxlself.com/images/help-choose.png'
+    }
   }
 })

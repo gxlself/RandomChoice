@@ -9,9 +9,11 @@ Component({
 
   },
   data: {
-
+    
   },
   methods: {
-    
+    tapToast() {
+      this.triggerEvent('taptoast')
+    }
   }
 })

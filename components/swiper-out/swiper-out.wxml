@@ -1,3 +1,3 @@
-<view class="gxl-swiper {{choiceMove}}" bindtouchstart="swiperTouchStart" bindtouchmove="swiperTouchMove" bindtouchend="swiperTouchEnd">
-  <slot></slot>
+<view class="gxl-swiper {{choiceMove}} {{show ? '' : 'gxl-swiper-del'}}" wx:if="{{showSwiper}}" bindtouchstart="swiperTouchStart" bindtouchmove="swiperTouchMove" bindtouchend="swiperTouchEnd"  bindanimationend="animationEnd">
+  <slot bind:tap="swipertap"></slot>
 </view>
