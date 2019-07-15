@@ -17,6 +17,7 @@ Page({
     currentChoose: {},                            // 非本人点击选中
     ishelpChoose: false,                          // 默认以为没有帮选
     moreHelpChoose: [],                           // 更多帮选结果
+    isHelpClick: false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -27,7 +28,8 @@ Page({
     fromPersonOpenId = options.from
     fromPersonId = options.id
     if (fromPersonOpenId && fromPersonId) {
-      this.getSharePeople(fromPersonOpenId, fromPersonId, storageOpenid)
+      this.getSharePeople(fromPersonOpenId)
+      this.getSharePeopleChoice(fromPersonId, storageOpenid)
     } else {
       this.back()
     }
@@ -38,7 +40,8 @@ Page({
       this.setData({isOwner: false})
     }
   }, 
-  getSharePeople(openId, id, currentOpenId) {
+  // 获取分享人的信息
+  getSharePeople(openId) {
     // 根据openId获取对应的分享人
     gxl.getMoreData('user', {_openid: openId}, reposnse => {
       // 讲道理分享出来 肯定是用户信息已经存放  但是夜路走多了还是需要谨慎
@@ -53,6 +56,9 @@ Page({
       wx.hideLoading()
       this.back()
     })
+  },
+  // 获取分享人分享犹豫项
+  getSharePeopleChoice(id, currentOpenId) {
     // 根据id获取对应的分享人犹豫项
     gxl.getOneData('choice', id, reposnse => {
       reposnse.data.choice.map(item => {
@@ -107,6 +113,8 @@ Page({
       wx.showToast({title: '请选一项作为你的决定', icon: 'none'})
       return
     }
+    if (this.data.isHelpClick) { return }
+    this.data.isHelpClick = true
     // 获取更多人给出的结果
     gxl.getMoreData('help', {chooseId: fromPersonId, helperOpenId: storageOpenid || app.globalData.openId}, reposnse => {
       if (reposnse.data.length > 0) {
