@@ -1,9 +1,5 @@
 <view class="page">
-  <view class='gxl-header' style='padding-top: {{STATUS_BAR_HEIGHT}}px;height:{{DEFAULT_HEADER_HEIGHT}}px;'>
-    <text class="header-icon header-share" bindtap="goAddChoice"></text>
-    <text class="header-title">随心所选-帮你选</text>
-    <text class="header-icon"></text>
-  </view>
+  <header-bar bind:back="goAddChoice" title="随心所选-帮你选" icon="add"></header-bar>
   <view class="gxl-blank" style="height: {{DEFAULT_HEADER_HEIGHT + STATUS_BAR_HEIGHT}}px"></view>
   <view class="gxl-body" style="min-height: {{BODY_HEIGHT}}px">
     <swiper-out wx:for="{{choiceList}}" bind:swiperHide="swiperHide" data-index="{{index}}" tapType="{{tapType}}" show="{{item.show}}">

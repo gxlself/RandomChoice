@@ -80,6 +80,9 @@ Page({
           })
         }
       })
+    }, err => {
+      wx.hideLoading()
+      this.back()
     })
   },
   back() {
@@ -119,7 +122,9 @@ Page({
           timestamp: new Date().getTime()
         }
         gxl.addData('help', choose, reposnse => {
-          this.setData({ishelpChoose: true})
+          choose.date = gxl.dateDiff(choose.timestamp)
+          this.data.moreHelpChoose.push({choose})
+          this.setData({ishelpChoose: true, moreHelpChoose: this.data.moreHelpChoose})
           wx.showToast({title: '帮选成功', icon: 'success'})
         }, error => {
           wx.showToast({title: '帮选失败，请稍候再试', icon: 'fail'})

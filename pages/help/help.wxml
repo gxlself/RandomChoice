@@ -1,9 +1,5 @@
 <view class="page">
-  <view class='gxl-header' style='padding-top: {{STATUS_BAR_HEIGHT}}px;height:{{DEFAULT_HEADER_HEIGHT}}px;'>
-    <text class="header-icon header-back" bindtap="back"></text>
-    <text class="header-title">随心所选-帮你选</text>
-    <text class="header-icon"></text>
-  </view>
+  <header-bar bind:back="back" title="随心所选-帮你选" icon="back"></header-bar>
   <view class="gxl-blank" style="height: {{DEFAULT_HEADER_HEIGHT + STATUS_BAR_HEIGHT}}px"></view>
   <view class="share-people" style="min-height: {{BODY_HEIGHT}}px">
     <view class="share-avator">
@@ -26,9 +22,9 @@
     <view class="help-choice" wx:if="{{moreHelpChoose.length > 0}}">
       <view class="help-choice-item" wx:for="{{moreHelpChoose}}">
         <view class="help-choice-user">
-          <image mode="widthFix" src="{{item.avatarUrl}}"></image>
+          <image mode="widthFix" src="{{item.avatarUrl ? item.avatarUrl : '../../image/weixin-b.png'}}"></image>
           <view class="choice-user-info">
-            <view>{{item.nickName}}</view>
+            <view>{{item.nickName ? item.nickName: '匿名'}}</view>
             <view>{{item.date}}</view>
           </view>
         </view>

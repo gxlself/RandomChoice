@@ -1,0 +1,30 @@
+.gxl-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: content-box;
+  border-bottom: 1rpx #ece8e8 solid;
+  background: #ffffff;
+  z-index: 99;
+}
+.header-icon{
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+  padding:20rpx 25rpx;
+}
+.header-back{
+  background: url('https://gxlself.com/images/back-a.png') center no-repeat;
+  background-size: 50rpx 50rpx;
+}
+.header-add{
+  background: url('https://gxlself.com/images/add.png') center no-repeat;
+  background-size: 50rpx 50rpx;
+}
+.header-title{
+  color: #3385ff;
+}

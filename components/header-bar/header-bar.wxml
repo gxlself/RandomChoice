@@ -1,0 +1,5 @@
+<view class='gxl-header' style='padding-top: {{STATUS_BAR_HEIGHT}}px;height:{{DEFAULT_HEADER_HEIGHT}}px;'>
+  <text class="header-icon header-{{icon}}" bindtap="back"></text>
+  <text class="header-title">{{title}}</text>
+  <text class="header-icon"></text>
+</view>
