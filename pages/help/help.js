@@ -104,11 +104,21 @@ Page({
   },
   // 帮选
   helpChoose() {
-    let storageOpenid = wx.getStorageSync('openid')
-    if (!storageOpenid && !app.globalData.openId) {
+    const nickName = wx.getStorageSync('nickName')
+    const storageOpenid = wx.getStorageSync('openid')
+    console.log('-----nickName-----', nickName)
+    console.log('-----storageOpenid-----', storageOpenid)
+    console.log('----------', nickName && storageOpenid && nickName != '<Undefined>' && storageOpenid != '<Undefined>')
+    console.log('----------', !(nickName && storageOpenid && nickName != '<Undefined>' && storageOpenid != '<Undefined>'))
+    if (!(nickName && storageOpenid && nickName != '<Undefined>' && storageOpenid != '<Undefined>')) {
       this.setData({isLogin: false})
       return
     }
+    // let storageOpenid = wx.getStorageSync('openid')
+    // if (!storageOpenid && !app.globalData.openId) {
+    //   this.setData({isLogin: false})
+    //   return
+    // }
     if (this.data.currentChoose.content == undefined) {
       wx.showToast({title: '请选一项作为你的决定', icon: 'none'})
       return

@@ -49,17 +49,15 @@ Page({
       })
       return
     }
-    gxl.getStorage('openid', res => {
-      if (res != '' || res != null || res != undefined || res != '<Undefined>') {
-        app.globalData.openId = res
-        this.setData({ isLogin: true, openId: res })
-        this.getChoiceList(res)
-      }else{
-        this.setData({ isLogin: false })
-      }
-    }, err => {
-      this.setData({isLogin: false})
-    })
+    const nickName = wx.getStorageSync('nickName')
+    const saveOpenid = wx.getStorageSync('openid')
+    if (nickName && saveOpenid && nickName != '<Undefined>' && saveOpenid != '<Undefined>') {
+      app.globalData.openId = res
+      this.setData({ isLogin: true, openId: saveOpenid })
+      this.getChoiceList(res)
+    }else{
+      this.setData({ isLogin: false })
+    }
   },
   onShow: function(){
     if ((app.globalData.choiceCount != this.data.choiceList.length) && app.globalData.openId) {

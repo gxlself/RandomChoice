@@ -154,10 +154,14 @@ function getCloudUrl(fileList, callback, fail){
 }
 function saveUserInfo(user, callback){
   cloudReq('login', loginData => {
-    let { appid, event, openid, unionid } = loginData.result;
-    setStorage('openid', openid)
+    let { appid, event, openid, unionid } = loginData.result
+    if (!user) { return }
+    if (!user.userInfo) { return }
+    if (!user.userInfo.avatarUrl) { return }
+    if (!user.userInfo.nickName) { return }
     setStorage('avatarUrl', user.userInfo.avatarUrl)
     setStorage('nickName', user.userInfo.nickName)
+    setStorage('openid', openid)
     let data = {
       unionid: unionid,
       avatarUrl: user.userInfo.avatarUrl,
