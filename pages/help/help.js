@@ -123,9 +123,10 @@ Page({
         }
         gxl.addData('help', choose, reposnse => {
           choose.date = gxl.dateDiff(choose.timestamp)
-          this.data.moreHelpChoose.push({choose})
-          this.setData({ishelpChoose: true, moreHelpChoose: this.data.moreHelpChoose})
-          wx.showToast({title: '帮选成功', icon: 'success'})
+          this.data.moreHelpChoose.push(choose)
+          this.setData({ishelpChoose: true, moreHelpChoose: this.data.moreHelpChoose}, () => {
+            wx.showToast({title: '帮选成功', icon: 'success'})
+          })
         }, error => {
           wx.showToast({title: '帮选失败，请稍候再试', icon: 'fail'})
         })
