@@ -19,7 +19,6 @@ Page({
       case 'button':
         let openId = e.target.dataset.openid
         let id = e.target.dataset.id
-        console.log(openId, id)
         this.setData({tapType: 2})
         return {
           title: '快来帮我看看这件事情我该怎么决定？',
@@ -52,9 +51,9 @@ Page({
     const nickName = wx.getStorageSync('nickName')
     const saveOpenid = wx.getStorageSync('openid')
     if (nickName && saveOpenid && nickName != '<Undefined>' && saveOpenid != '<Undefined>') {
-      app.globalData.openId = res
+      app.globalData.openId = saveOpenid
       this.setData({ isLogin: true, openId: saveOpenid })
-      this.getChoiceList(res)
+      this.getChoiceList(saveOpenid)
     }else{
       this.setData({ isLogin: false })
     }

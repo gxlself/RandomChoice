@@ -2,6 +2,7 @@ const gxl = require('../../utils/util.js');
 const app = getApp();
 let fromPersonOpenId = void 0;
 let fromPersonId = void 0;
+let interTimer = null;
 Page({
   /**
    * 页面的初始数据
@@ -40,6 +41,12 @@ Page({
       this.setData({isOwner: false})
     }
   }, 
+  onShow() {
+    // 开始轮询数据
+    interTimer =  setInterval(() => {
+      this.getMorePeopoleData(fromPersonId)
+    }, 1000)
+  },
   // 获取分享人的信息
   getSharePeople(openId) {
     // 根据openId获取对应的分享人
@@ -57,9 +64,8 @@ Page({
       this.back()
     })
   },
-  // 获取分享人分享犹豫项
+  // 根据id获取对应的分享人犹豫项
   getSharePeopleChoice(id, currentOpenId) {
-    // 根据id获取对应的分享人犹豫项
     gxl.getOneData('choice', id, reposnse => {
       reposnse.data.choice.map(item => {
         if (item.content == reposnse.data.choose.content && (fromPersonOpenId == currentOpenId || fromPersonOpenId == app.globalData.openId)) {
@@ -69,28 +75,31 @@ Page({
         return item
       })
       this.setData({fromPersonChoice: reposnse.data})
-      // 获取更多人给出的结果
-      gxl.getMoreData('help', {chooseId: id}, reposnse => {
-        reposnse.data = reposnse.data.map(item => {
-          item.date = gxl.dateDiff(item.timestamp)
-          return item
-        })
-        this.setData({moreHelpChoose: reposnse.data})
-        let storageOpenid = wx.getStorageSync('openid')
-        if (storageOpenid || app.globalData.openId) {
-          reposnse.data.forEach(item => {
-            if (item.helperOpenId == storageOpenid || item.helperOpenId == app.globalData.openId) {
-              this.setData({ishelpChoose: true})
-              this.filterChooseItem(item.chooseChoice)
-            }
-          })
-        }
-      })
     }, err => {
       wx.hideLoading()
       this.back()
     })
   },
+  // 获取更多人给出的结果
+  getMorePeopoleData(id) {
+    gxl.getMoreData('help', {chooseId: id}, reposnse => {
+      reposnse.data = reposnse.data.map(item => {
+        item.date = gxl.dateDiff(item.timestamp)
+        return item
+      })
+      this.setData({moreHelpChoose: reposnse.data})
+      let storageOpenid = wx.getStorageSync('openid')
+      if (storageOpenid || app.globalData.openId) {
+        reposnse.data.forEach(item => {
+          if (item.helperOpenId == storageOpenid || item.helperOpenId == app.globalData.openId) {
+            this.setData({ishelpChoose: true})
+            this.filterChooseItem(item.chooseChoice)
+          }
+        })
+      }
+    })
+  },
+  // 返回
   back() {
     wx.reLaunch({url: '../index/index'})
   },
@@ -106,10 +115,6 @@ Page({
   helpChoose() {
     const nickName = wx.getStorageSync('nickName')
     const storageOpenid = wx.getStorageSync('openid')
-    console.log('-----nickName-----', nickName)
-    console.log('-----storageOpenid-----', storageOpenid)
-    console.log('----------', nickName && storageOpenid && nickName != '<Undefined>' && storageOpenid != '<Undefined>')
-    console.log('----------', !(nickName && storageOpenid && nickName != '<Undefined>' && storageOpenid != '<Undefined>'))
     if (!(nickName && storageOpenid && nickName != '<Undefined>' && storageOpenid != '<Undefined>')) {
       this.setData({isLogin: false})
       return
@@ -213,4 +218,10 @@ Page({
       })
     })
   },
+  onUnload() {
+    clearInterval(interTimer)
+  },
+  onHide() {
+    clearInterval(interTimer)
+  }
 })
