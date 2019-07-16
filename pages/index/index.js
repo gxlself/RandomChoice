@@ -63,6 +63,7 @@ Page({
       this.getChoiceList(app.globalData.openId)
     }
   },
+  // 展示结果
   showResult(e) {
     this.setData({tapType: 1})
     let choiceIndex = e.currentTarget.dataset.index
@@ -77,10 +78,12 @@ Page({
       wx.vibrateShort()
     })
   },
+  // 点击弹框
   tapToast() {
     this.data.showResult =! this.data.showResult
     this.setData({showResult: this.data.showResult})
   },
+  // 删除选项
   deleteChoice(e) {
     this.setData({tapType: 2})
     let choiceId = e.currentTarget.dataset.id
@@ -93,6 +96,7 @@ Page({
       wx.showToast({ title: '删除失败', icon: 'none', duration: 1500, mask: true })
     })
   },
+  // 跳转到添加选项页
   goAddChoice() {
     if (!this.data.openId && !app.globalData.openId) {
       this.setData({ isLogin: false })
@@ -102,6 +106,7 @@ Page({
       url: '../add-choice/add-choice'
     })
   },
+  // 获取已经添加的选项数据
   getChoiceList(openId) {
     gxl.getMoreData('choice', {_openid: openId}, res =>{
       if (res.errMsg.indexOf('get:ok') > -1) {
@@ -114,6 +119,7 @@ Page({
       }
     })
   },
+  // 监听动画结束状态
   animationEnd() {
     // backgroundAudioManager.stop()
     // backgroundAudioManager.seek(0)
