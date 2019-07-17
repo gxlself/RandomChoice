@@ -13,6 +13,7 @@ Page({
     showResult: false,                                  // 展示结果显隐
     choiceObject: {},                                   // 展示结果
     tapType: 1,                                         // 点击按钮类型
+    showMore: false,                                    // 点击添加后弹出开始选择
   },
   onShareAppMessage: function (e) {
     switch(e.from) {
