@@ -1,6 +1,7 @@
 <view class="page">
   <header-bar bind:back="goAddChoice" title="随心所选-帮你选" icon="add"></header-bar>
   <view class="gxl-blank" style="height: {{DEFAULT_HEADER_HEIGHT + STATUS_BAR_HEIGHT}}px"></view>
+  <!-- 展示所有的可选 -->
   <view class="gxl-body" style="min-height: {{BODY_HEIGHT}}px">
     <swiper-out wx:for="{{choiceList}}" bind:swiperHide="swiperHide" data-index="{{index}}" tapType="{{tapType}}" show="{{item.show}}">
       <view class="choice-item">
@@ -9,6 +10,9 @@
       </view>
       <view class="choice-delete" bindtap="deleteChoice" data-index="{{index}}" data-id="{{item._id}}">
         <image src="../../image/del-a.png" mode="widthFix"></image>
+      </view>
+      <view class="choice-view" bindtap="viewChoice" data-openid="{{item._openid}}" data-id="{{item._id}}">
+        <image src="../../image/edit-e.png" mode="widthFix"></image>
       </view>
       <button open-type="share" class="choice-share" data-openid="{{item._openid}}" data-index="{{index}}" data-title="{{item.title}}" data-id="{{item._id}}">
         <image src="../../image/share-a.png" mode="widthFix"></image>

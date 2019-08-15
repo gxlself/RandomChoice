@@ -3,6 +3,7 @@ const app = getApp();
 let fromPersonOpenId = void 0;
 let fromPersonId = void 0;
 let interTimer = null;
+let visitPage = false
 Page({
   /**
    * 页面的初始数据
@@ -43,9 +44,12 @@ Page({
   }, 
   onShow() {
     // 开始轮询数据
-    interTimer =  setInterval(() => {
+    if (!visitPage) {
       this.getMorePeopoleData(fromPersonId)
-    }, 1000 * 60)
+    }
+    interTimer = setInterval(() => {
+      this.getMorePeopoleData(fromPersonId)
+    }, 60 * 1000)
   },
   // 获取分享人的信息
   getSharePeople(openId) {
@@ -88,6 +92,7 @@ Page({
         return item
       })
       this.setData({moreHelpChoose: reposnse.data})
+      visitPage = true
       let storageOpenid = wx.getStorageSync('openid')
       if (storageOpenid || app.globalData.openId) {
         reposnse.data.forEach(item => {
@@ -101,7 +106,12 @@ Page({
   },
   // 返回
   back() {
-    wx.reLaunch({url: '../index/index'})
+    let currentPages = getCurrentPages()
+    if (currentPages.length > 1) {
+      wx.navigateBack()
+    } else {
+      wx.reLaunch({url: '../index/index'})
+    }
   },
   // 分享
   onShareAppMessage: function () {
@@ -219,9 +229,11 @@ Page({
     })
   },
   onUnload() {
+    visitPage = false
     clearInterval(interTimer)
   },
   onHide() {
+    visitPage = false
     clearInterval(interTimer)
   }
 })

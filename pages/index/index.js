@@ -97,6 +97,14 @@ Page({
       wx.showToast({ title: '删除失败', icon: 'none', duration: 1500, mask: true })
     })
   },
+  // 查看分享出去的选项
+  viewChoice(e) {
+    let openid = e.currentTarget.dataset.openid
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../help/help?from=' + openid + '&id=' + id
+    })
+  },
   // 跳转到添加选项页
   goAddChoice() {
     if (!this.data.openId && !app.globalData.openId) {

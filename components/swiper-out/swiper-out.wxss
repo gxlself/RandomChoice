@@ -8,11 +8,11 @@
   overflow: hidden;
 }
 .gxl-swiper-move{
-	transform: translateX(-200rpx)
+	transform: translateX(-300rpx)
 }
 @keyframes del{
   from {
-    transform: translateX(-200rpx);
+    transform: translateX(-300rpx);
     opacity: 1;
   }
   to {

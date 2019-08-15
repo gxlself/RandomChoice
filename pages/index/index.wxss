@@ -36,7 +36,7 @@
   right: 30rpx;
   color: #3385ff;
 }
-.choice-delete, .choice-share{
+.choice-delete, .choice-share, .choice-view{
   min-width: 100rpx;
   display: flex;
   justify-content: center;
@@ -50,7 +50,10 @@
 .choice-share{
   background: #20d830;
 }
-.choice-delete image, .choice-share image{
+.choice-view{
+  background: #f5a459;
+}
+.choice-delete image, .choice-share image, .choice-view image{
   width: 40rpx;
   height: 40rpx;
   line-height: 0;
