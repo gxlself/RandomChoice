@@ -10,11 +10,12 @@
       <view class="choice-delete" bindtap="deleteChoice" data-index="{{index}}" data-id="{{item._id}}">
         <image src="../../image/del-a.png" mode="widthFix"></image>
       </view>
-      <button open-type="share" class="choice-share" bindtap="setDisabled" data-openid="{{item._openid}}" data-index="{{index}}" data-id="{{item._id}}">
+      <button open-type="share" class="choice-share" data-openid="{{item._openid}}" data-index="{{index}}" data-title="{{item.title}}" data-id="{{item._id}}">
         <image src="../../image/share-a.png" mode="widthFix"></image>
       </button>
     </swiper-out>
   </view>
+  <!-- 授权登录 -->
   <view class="gxl-modal" wx:if="{{!isLogin}}">
     <view class="gxl-modal-box" wx:if="{{!isLogin}}">
       <view class="gxl-modal-ava">
@@ -31,6 +32,7 @@
       </view>
     </view>
   </view>
+  <!-- 展示结果 -->
   <user-toast bind:taptoast="tapToast" wx:if="{{showResult}}">
     <view class="user-result" wx:if="{{showResult}}" catch:tap="false" bindanimationend="animationEnd">
       <view class="result-title">{{choiceObject.title}}</view>

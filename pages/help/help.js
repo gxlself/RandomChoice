@@ -45,7 +45,7 @@ Page({
     // 开始轮询数据
     interTimer =  setInterval(() => {
       this.getMorePeopoleData(fromPersonId)
-    }, 1000)
+    }, 1000 * 60)
   },
   // 获取分享人的信息
   getSharePeople(openId) {

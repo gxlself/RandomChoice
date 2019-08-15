@@ -17,11 +17,12 @@ Page({
   onShareAppMessage: function (e) {
     switch(e.from) {
       case 'button':
+        let shareTitle = e.target.dataset.title ? e.target.dataset.title : '快来帮我看看这件事情我该怎么决定？'
         let openId = e.target.dataset.openid
         let id = e.target.dataset.id
         this.setData({tapType: 2})
         return {
-          title: '快来帮我看看这件事情我该怎么决定？',
+          title: shareTitle,
           path: '/pages/help/help?from=' + openId + '&id=' + id,
           imageUrl: 'https://gxlself.com/images/help-choose.png'
         }
